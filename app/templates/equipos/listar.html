@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Equipos{% endblock %}
+{% block content %}
+<div class="card">
+    <h2>Equipos Registrados</h2>
+    <a class="btn" href="{{ url_for('equipos.nuevo') }}" style="background:#2e7d32;">+ Registrar nuevo equipo</a>
+
+    {% if equipos %}
+    <table>
+        <tr>
+            <th>Código</th>
+            <th>Nombre</th>
+            <th>Ubicación</th>
+            <th>Estado</th>
+            <th></th>
+        </tr>
+        {% for eq in equipos %}
+        <tr>
+            <td>{{ eq.codigo_interno }}</td>
+            <td>{{ eq.nombre }}</td>
+            <td>{{ eq.ubicacion or "-" }}</td>
+            <td><span class="badge badge-ok">{{ eq.estado }}</span></td>
+            <td>
+                <a href="{{ url_for('equipos.pantalla_principal', equipo_id=eq.id) }}">Ver</a>
+                &nbsp;|&nbsp;
+                <a href="{{ url_for('equipos.ver_qr', equipo_id=eq.id) }}">QR</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+    <p>Aún no hay equipos registrados.</p>
+    {% endif %}
+</div>
+{% endblock %}

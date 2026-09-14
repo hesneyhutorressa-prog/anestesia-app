@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Registrar Equipo{% endblock %}
+{% block content %}
+<div class="card">
+    <h2>Registrar Nuevo Equipo</h2>
+    <form method="POST">
+        <label>Código interno *</label>
+        <input type="text" name="codigo_interno" placeholder="Ej: ANE-001" required>
+
+        <label>Nombre del equipo *</label>
+        <input type="text" name="nombre" placeholder="Ej: Máquina de Anestesia GE Aisys CS2" required>
+
+        <div class="grid2">
+            <div>
+                <label>Marca</label>
+                <input type="text" name="marca">
+            </div>
+            <div>
+                <label>Modelo</label>
+                <input type="text" name="modelo">
+            </div>
+        </div>
+
+        <div class="grid2">
+            <div>
+                <label>Número de serie</label>
+                <input type="text" name="numero_serie">
+            </div>
+            <div>
+                <label>Ubicación</label>
+                <input type="text" name="ubicacion" placeholder="Ej: Quirófano 3">
+            </div>
+        </div>
+
+        <button type="submit">Registrar y generar QR</button>
+    </form>
+</div>
+{% endblock %}

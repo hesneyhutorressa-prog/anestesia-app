@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}{{ equipo.codigo_interno }}{% endblock %}
+{% block content %}
+<div class="card">
+    <h2>{{ equipo.codigo_interno }} — {{ equipo.nombre }}</h2>
+    <p><strong>Marca/Modelo:</strong> {{ equipo.marca or "-" }} / {{ equipo.modelo or "-" }}</p>
+    <p><strong>Ubicación:</strong> {{ equipo.ubicacion or "-" }}</p>
+    <p><strong>Estado:</strong> <span class="badge badge-ok">{{ equipo.estado }}</span></p>
+</div>
+
+<div class="card">
+    <h3>Módulos</h3>
+    <p style="color:#888; font-size:14px;">
+        (Los siguientes módulos se irán habilitando en las próximas semanas: Hoja de Vida, Inventario, Checklist, Historial, Evidencias, Manuales, Dashboard, Asistente IA)
+    </p>
+</div>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}QR - {{ equipo.codigo_interno }}{% endblock %}
+{% block content %}
+<div class="card" style="text-align:center;">
+    <h2>Código QR — {{ equipo.codigo_interno }}</h2>
+    <p>{{ equipo.nombre }}</p>
+    <img src="{{ url_for('static', filename=equipo.qr_path) }}" alt="QR del equipo" style="width:250px; height:250px;">
+    <p style="font-size:13px; color:#666;">Imprime este código y pégalo en el equipo físico. Al escanearlo se abrirá directamente su pantalla principal.</p>
+    <a class="btn" href="{{ url_for('equipos.listar') }}">Volver al listado</a>
+</div>
+{% endblock %}

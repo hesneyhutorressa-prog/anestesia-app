@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Inicio{% endblock %}
+{% block content %}
+<div class="card">
+    <h2>Bienvenido</h2>
+    <p>Gestión de mantenimiento para equipos de anestesia.</p>
+    <a class="btn" href="{{ url_for('equipos.listar') }}">Ver equipos registrados</a>
+    <a class="btn" href="{{ url_for('equipos.nuevo') }}" style="background:#2e7d32;">+ Registrar nuevo equipo</a>
+</div>
+{% endblock %}
