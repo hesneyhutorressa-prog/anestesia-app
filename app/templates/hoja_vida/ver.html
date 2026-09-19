@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Hoja de Vida - {{ equipo.codigo_interno }}{% endblock %}
+{% block content %}
+<div class="card">
+    <h2>Hoja de Vida — {{ equipo.codigo_interno }}</h2>
+    <p style="color:#666; font-size:14px;">{{ equipo.nombre }}</p>
+
+    <form method="POST">
+        <label>Fecha de adquisición</label>
+        <input type="date" name="fecha_adquisicion" value="{{ hv.fecha_adquisicion if hv else '' }}">
+
+        <label>Proveedor</label>
+        <input type="text" name="proveedor" value="{{ hv.proveedor if hv else '' }}" placeholder="Ej: GE Healthcare Colombia">
+
+        <div class="grid2">
+            <div>
+                <label>Vida útil (años)</label>
+                <input type="number" name="vida_util_anios" value="{{ hv.vida_util_anios if hv else '' }}">
+            </div>
+            <div>
+                <label>Responsable</label>
+                <input type="text" name="responsable" value="{{ hv.responsable if hv else '' }}">
+            </div>
+        </div>
+
+        <button type="submit">Guardar</button>
+    </form>
+
+    <a class="btn" href="{{ url_for('equipos.pantalla_principal', equipo_id=equipo.id) }}" style="background:#888;">← Volver al equipo</a>
+</div>
+{% endblock %}

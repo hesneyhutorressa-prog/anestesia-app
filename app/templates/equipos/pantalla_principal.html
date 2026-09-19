@@ -10,8 +10,12 @@
 
 <div class="card">
     <h3>Módulos</h3>
-    <p style="color:#888; font-size:14px;">
-        (Los siguientes módulos se irán habilitando en las próximas semanas: Hoja de Vida, Inventario, Checklist, Historial, Evidencias, Manuales, Dashboard, Asistente IA)
+    <div class="grid2">
+        <a class="btn" href="{{ url_for('hoja_vida.ver', equipo_id=equipo.id) }}">Hoja de Vida</a>
+        <a class="btn" href="{{ url_for('inventario.listar', equipo_id=equipo.id) }}">Inventario</a>
+    </div>
+    <p style="color:#888; font-size:14px; margin-top:16px;">
+        (Próximamente: Checklist, Historial, Evidencias, Manuales, Dashboard, Asistente IA)
     </p>
 </div>
 {% endblock %}

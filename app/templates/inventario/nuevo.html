@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Nuevo Repuesto{% endblock %}
+{% block content %}
+<div class="card">
+    <h2>Agregar Repuesto — {{ equipo.codigo_interno }}</h2>
+    <form method="POST">
+        <label>Nombre del repuesto *</label>
+        <input type="text" name="repuesto" placeholder="Ej: Válvula de flujo O2" required>
+
+        <div class="grid2">
+            <div>
+                <label>Cantidad</label>
+                <input type="number" name="cantidad" value="0" min="0">
+            </div>
+            <div>
+                <label>Stock mínimo</label>
+                <input type="number" name="stock_minimo" value="1" min="0">
+            </div>
+        </div>
+
+        <label>Ubicación en bodega</label>
+        <input type="text" name="ubicacion_bodega" placeholder="Ej: Estante B-3">
+
+        <button type="submit">Guardar repuesto</button>
+    </form>
+    <a class="btn" href="{{ url_for('inventario.listar', equipo_id=equipo.id) }}" style="background:#888;">← Volver al inventario</a>
+</div>
+{% endblock %}

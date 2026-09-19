@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}Inventario - {{ equipo.codigo_interno }}{% endblock %}
+{% block content %}
+<div class="card">
+    <h2>Inventario — {{ equipo.codigo_interno }}</h2>
+    <p style="color:#666; font-size:14px;">{{ equipo.nombre }}</p>
+
+    <a class="btn" href="{{ url_for('inventario.nuevo', equipo_id=equipo.id) }}" style="background:#2e7d32;">+ Agregar repuesto</a>
+
+    {% if items %}
+    <table>
+        <tr>
+            <th>Repuesto</th>
+            <th>Cantidad</th>
+            <th>Stock mínimo</th>
+            <th>Ubicación</th>
+            <th></th>
+        </tr>
+        {% for item in items %}
+        <tr>
+            <td>{{ item.repuesto }}</td>
+            <td>
+                {% if item.cantidad <= item.stock_minimo %}
+                    <span class="badge badge-warn">{{ item.cantidad }}</span>
+                {% else %}
+                    {{ item.cantidad }}
+                {% endif %}
+            </td>
+            <td>{{ item.stock_minimo }}</td>
+            <td>{{ item.ubicacion_bodega or "-" }}</td>
+            <td>
+                <form method="POST" action="{{ url_for('inventario.eliminar', equipo_id=equipo.id, item_id=item.id) }}" style="display:inline; margin:0;" onsubmit="return confirm('¿Eliminar este repuesto?');">
+                    <button type="submit" style="background:#943126; padding:4px 10px; margin:0; font-size:12px;">Eliminar</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+    <p>Aún no hay repuestos registrados para este equipo.</p>
+    {% endif %}
+
+    <a class="btn" href="{{ url_for('equipos.pantalla_principal', equipo_id=equipo.id) }}" style="background:#888;">← Volver al equipo</a>
+</div>
+{% endblock %}

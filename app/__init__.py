@@ -14,8 +14,12 @@ def create_app():
 
     from .routes.main import main_bp
     from .routes.equipos import equipos_bp
+    from .routes.hoja_vida import hoja_vida_bp
+    from .routes.inventario import inventario_bp
     app.register_blueprint(main_bp)
     app.register_blueprint(equipos_bp)
+    app.register_blueprint(hoja_vida_bp)
+    app.register_blueprint(inventario_bp)
 
     with app.app_context():
         db.create_all()
