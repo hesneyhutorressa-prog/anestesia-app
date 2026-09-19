@@ -30,8 +30,12 @@
     </style>
 </head>
 <body>
-    <header>
-        <h1><a href="{{ url_for('main.index') }}">Mantenimiento Anestesia</a></h1>
+        <header>
+        <h1><a href="{{ url_for('main.index') }}">🔧 Mantenimiento Anestesia</a></h1>
+        <nav style="margin-top:6px;">
+            <a href="{{ url_for('equipos.listar') }}" style="margin-right:16px; font-size:13px;">Equipos</a>
+            <a href="{{ url_for('dashboard.index') }}" style="font-size:13px;">Dashboard</a>
+        </nav>
     </header>
     <main>
         {% with messages = get_flashed_messages(with_categories=true) %}

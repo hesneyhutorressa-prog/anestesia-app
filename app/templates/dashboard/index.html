@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<div class="grid2">
+    <div class="card" style="text-align:center;">
+        <p style="font-size:13px; color:#888; margin:0;">Total de equipos</p>
+        <p style="font-size:36px; font-weight:bold; margin:8px 0; color:#1f4e79;">{{ total_equipos }}</p>
+    </div>
+    <div class="card" style="text-align:center;">
+        <p style="font-size:13px; color:#888; margin:0;">Operativos</p>
+        <p style="font-size:36px; font-weight:bold; margin:8px 0; color:#1e8449;">{{ operativos }}</p>
+    </div>
+</div>
+
+<div class="card">
+    <h3>Últimos Mantenimientos</h3>
+    {% if ultimos_mantenimientos %}
+    <table>
+        <tr>
+            <th>Equipo</th>
+            <th>Fecha</th>
+            <th>Técnico</th>
+            <th>Descripción</th>
+        </tr>
+        {% for r in ultimos_mantenimientos %}
+        <tr>
+            <td><a href="{{ url_for('equipos.pantalla_principal', equipo_id=r.equipo.id) }}">{{ r.equipo.codigo_interno }}</a></td>
+            <td>{{ r.fecha.strftime("%d/%m/%Y") }}</td>
+            <td>{{ r.tecnico or "-" }}</td>
+            <td>{{ r.descripcion }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+    <p>Aún no hay mantenimientos registrados.</p>
+    {% endif %}
+</div>
+
+<div class="card">
+    <h3>Alertas de Inventario (stock bajo)</h3>
+    {% if alertas_inventario %}
+    <table>
+        <tr>
+            <th>Equipo</th>
+            <th>Repuesto</th>
+            <th>Cantidad</th>
+            <th>Stock mínimo</th>
+        </tr>
+        {% for item in alertas_inventario %}
+        <tr>
+            <td><a href="{{ url_for('inventario.listar', equipo_id=item.equipo.id) }}">{{ item.equipo.codigo_interno }}</a></td>
+            <td>{{ item.repuesto }}</td>
+            <td><span class="badge badge-warn">{{ item.cantidad }}</span></td>
+            <td>{{ item.stock_minimo }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+    <p>No hay alertas de inventario por el momento.</p>
+    {% endif %}
+</div>
+{% endblock %}
