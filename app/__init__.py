@@ -21,6 +21,7 @@ def create_app():
     from .routes.evidencias import evidencias_bp
     from .routes.manuales import manuales_bp
     from .routes.dashboard import dashboard_bp
+    from .routes.asistente import asistente_bp
     app.register_blueprint(main_bp)
     app.register_blueprint(equipos_bp)
     app.register_blueprint(hoja_vida_bp)
@@ -30,6 +31,7 @@ def create_app():
     app.register_blueprint(evidencias_bp)
     app.register_blueprint(manuales_bp)
     app.register_blueprint(dashboard_bp)
+    app.register_blueprint(asistente_bp)
 
     with app.app_context():
         db.create_all()

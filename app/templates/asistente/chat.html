@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Asistente IA - {{ equipo.codigo_interno }}{% endblock %}
+{% block content %}
+<div class="card">
+    <h2>Asistente Técnico — {{ equipo.codigo_interno }}</h2>
+    <p style="color:#666; font-size:14px;">{{ equipo.nombre }}</p>
+
+    <form method="POST">
+        <label>Escribe tu pregunta</label>
+        <input type="text" name="pregunta" placeholder="Ej: ¿Cada cuánto se cambia el filtro?" value="{{ pregunta or '' }}" required>
+        <button type="submit">Preguntar</button>
+    </form>
+
+    <p style="font-size:12px; color:#888; margin-top:10px;">
+        Sugerencias: filtros, vaporizador, alarmas, presión, batería, fugas, calibración
+    </p>
+
+    {% if respuesta %}
+    <div style="background:#eaf2fb; border-left:4px solid #1f4e79; padding:14px; border-radius:6px; margin-top:20px;">
+        <p style="font-size:13px; color:#1f4e79; font-weight:bold; margin:0 0 6px 0;">Tú preguntaste:</p>
+        <p style="margin:0 0 14px 0;">{{ pregunta }}</p>
+        <p style="font-size:13px; color:#1f4e79; font-weight:bold; margin:0 0 6px 0;">Asistente:</p>
+        <p style="margin:0;">{{ respuesta }}</p>
+    </div>
+    {% endif %}
+
+    <a class="btn" href="{{ url_for('equipos.pantalla_principal', equipo_id=equipo.id) }}" style="background:#888;">← Volver al equipo</a>
+</div>
+{% endblock %}
