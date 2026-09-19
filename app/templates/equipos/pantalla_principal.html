@@ -15,9 +15,10 @@
         <a class="btn" href="{{ url_for('inventario.listar', equipo_id=equipo.id) }}">Inventario</a>
         <a class="btn" href="{{ url_for('checklist.nuevo', equipo_id=equipo.id) }}">Nuevo Checklist</a>
         <a class="btn" href="{{ url_for('historial.listar', equipo_id=equipo.id) }}">Historial</a>
+        <a class="btn" href="{{ url_for('manuales.listar', equipo_id=equipo.id) }}">Manuales</a>
     </div>
     <p style="color:#888; font-size:14px; margin-top:16px;">
-        (Próximamente: Evidencias, Manuales, Dashboard, Asistente IA)
+        (Próximamente: Dashboard, Asistente IA)
     </p>
 </div>
 {% endblock %}

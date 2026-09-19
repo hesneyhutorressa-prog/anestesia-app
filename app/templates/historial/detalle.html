@@ -20,4 +20,32 @@
 
     <a class="btn" href="{{ url_for('historial.listar', equipo_id=equipo.id) }}" style="background:#888;">← Volver al historial</a>
 </div>
+
+<div class="card">
+    <h3>Evidencias Fotográficas</h3>
+
+    <form method="POST" action="{{ url_for('evidencias.subir', equipo_id=equipo.id, historial_id=registro.id) }}" enctype="multipart/form-data">
+        <label>Subir foto (PNG, JPG, WEBP)</label>
+        <input type="file" name="foto" accept="image/*" required>
+        <label>Descripción (opcional)</label>
+        <input type="text" name="descripcion" placeholder="Ej: Estado del filtro antes del cambio">
+        <button type="submit">Subir evidencia</button>
+    </form>
+
+    {% if registro.evidencias %}
+    <div style="display:flex; flex-wrap:wrap; gap:16px; margin-top:20px;">
+        {% for ev in registro.evidencias %}
+        <div style="width:160px;">
+            <img src="{{ url_for('static', filename=ev.ruta_archivo) }}" style="width:100%; border-radius:8px; border:1px solid #ddd;">
+            <p style="font-size:12px; color:#666; margin:4px 0;">{{ ev.descripcion or "-" }}</p>
+            <form method="POST" action="{{ url_for('evidencias.eliminar', equipo_id=equipo.id, historial_id=registro.id, evidencia_id=ev.id) }}" onsubmit="return confirm('¿Eliminar esta foto?');">
+                <button type="submit" style="background:#943126; padding:4px 8px; font-size:11px; margin-top:0;">Eliminar</button>
+            </form>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p style="margin-top:16px; color:#888;">Aún no hay evidencias fotográficas para este mantenimiento.</p>
+    {% endif %}
+</div>
 {% endblock %}

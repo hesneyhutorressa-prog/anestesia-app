@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Manuales - {{ equipo.codigo_interno }}{% endblock %}
+{% block content %}
+<div class="card">
+    <h2>Manuales Técnicos — {{ equipo.codigo_interno }}</h2>
+    <p style="color:#666; font-size:14px;">{{ equipo.nombre }}</p>
+
+    <form method="POST" action="{{ url_for('manuales.subir', equipo_id=equipo.id) }}" enctype="multipart/form-data">
+        <label>Archivo PDF</label>
+        <input type="file" name="archivo" accept="application/pdf" required>
+
+        <label>Tipo de manual</label>
+        <select name="tipo">
+            <option value="manual_usuario">Manual de usuario</option>
+            <option value="manual_servicio">Manual de servicio</option>
+            <option value="ficha_tecnica">Ficha técnica</option>
+        </select>
+
+        <button type="submit">Subir manual</button>
+    </form>
+
+    {% if manuales %}
+    <table>
+        <tr>
+            <th>Archivo</th>
+            <th>Tipo</th>
+            <th></th>
+        </tr>
+        {% for m in manuales %}
+        <tr>
+            <td><a href="{{ url_for('static', filename=m.ruta_archivo) }}" target="_blank">{{ m.nombre_archivo }}</a></td>
+            <td>{{ m.tipo }}</td>
+            <td>
+                <form method="POST" action="{{ url_for('manuales.eliminar', equipo_id=equipo.id, manual_id=m.id) }}" style="display:inline; margin:0;" onsubmit="return confirm('¿Eliminar este manual?');">
+                    <button type="submit" style="background:#943126; padding:4px 10px; margin:0; font-size:12px;">Eliminar</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+    <p style="margin-top:16px;">Aún no hay manuales cargados para este equipo.</p>
+    {% endif %}
+
+    <a class="btn" href="{{ url_for('equipos.pantalla_principal', equipo_id=equipo.id) }}" style="background:#888;">← Volver al equipo</a>
+</div>
+{% endblock %}
