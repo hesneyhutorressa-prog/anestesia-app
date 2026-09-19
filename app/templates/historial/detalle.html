@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Detalle Mantenimiento{% endblock %}
+{% block content %}
+<div class="card">
+    <h2>Detalle del Mantenimiento</h2>
+    <p><strong>Equipo:</strong> {{ equipo.codigo_interno }} — {{ equipo.nombre }}</p>
+    <p><strong>Fecha:</strong> {{ registro.fecha.strftime("%d/%m/%Y %H:%M") }}</p>
+    <p><strong>Técnico:</strong> {{ registro.tecnico or "-" }}</p>
+    <p><strong>Tipo:</strong> {{ registro.checklist.tipo if registro.checklist else "-" }}</p>
+    <p><strong>Observaciones:</strong> {{ registro.descripcion }}</p>
+
+    {% if items %}
+    <label>Ítems verificados en este checklist:</label>
+    <ul>
+        {% for item in items %}
+        <li>✔ {{ item }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <a class="btn" href="{{ url_for('historial.listar', equipo_id=equipo.id) }}" style="background:#888;">← Volver al historial</a>
+</div>
+{% endblock %}

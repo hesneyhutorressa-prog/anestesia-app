@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Historial - {{ equipo.codigo_interno }}{% endblock %}
+{% block content %}
+<div class="card">
+    <h2>Historial — {{ equipo.codigo_interno }}</h2>
+    <p style="color:#666; font-size:14px;">{{ equipo.nombre }}</p>
+
+    <a class="btn" href="{{ url_for('checklist.nuevo', equipo_id=equipo.id) }}" style="background:#2e7d32;">+ Nuevo mantenimiento</a>
+
+    {% if registros %}
+    <table>
+        <tr>
+            <th>Fecha</th>
+            <th>Técnico</th>
+            <th>Descripción</th>
+            <th></th>
+        </tr>
+        {% for r in registros %}
+        <tr>
+            <td>{{ r.fecha.strftime("%d/%m/%Y %H:%M") }}</td>
+            <td>{{ r.tecnico or "-" }}</td>
+            <td>{{ r.descripcion }}</td>
+            <td><a href="{{ url_for('historial.detalle', equipo_id=equipo.id, historial_id=r.id) }}">Ver detalle</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+    <p>Aún no hay mantenimientos registrados para este equipo.</p>
+    {% endif %}
+
+    <a class="btn" href="{{ url_for('equipos.pantalla_principal', equipo_id=equipo.id) }}" style="background:#888;">← Volver al equipo</a>
+</div>
+{% endblock %}

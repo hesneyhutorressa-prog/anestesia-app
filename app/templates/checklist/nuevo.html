@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Checklist - {{ equipo.codigo_interno }}{% endblock %}
+{% block content %}
+<div class="card">
+    <h2>Checklist de Mantenimiento — {{ equipo.codigo_interno }}</h2>
+    <p style="color:#666; font-size:14px;">{{ equipo.nombre }}</p>
+
+    <form method="POST">
+        <div class="grid2">
+            <div>
+                <label>Tipo de mantenimiento</label>
+                <select name="tipo" required>
+                    <option value="preventivo">Preventivo</option>
+                    <option value="correctivo">Correctivo</option>
+                </select>
+            </div>
+            <div>
+                <label>Técnico</label>
+                <input type="text" name="tecnico" placeholder="Tu nombre" required>
+            </div>
+        </div>
+
+        <label style="margin-top:20px;">Ítems a verificar</label>
+        {% for item in items %}
+        <div style="margin-top:8px;">
+            <label style="font-weight:normal; display:flex; align-items:center; gap:8px;">
+                <input type="checkbox" name="items" value="{{ item }}" style="width:auto; margin:0;">
+                {{ item }}
+            </label>
+        </div>
+        {% endfor %}
+
+        <label>Observaciones (opcional)</label>
+        <textarea name="descripcion" rows="3" placeholder="Detalles adicionales, hallazgos, repuestos usados..."></textarea>
+
+        <button type="submit">Guardar checklist</button>
+    </form>
+
+    <a class="btn" href="{{ url_for('equipos.pantalla_principal', equipo_id=equipo.id) }}" style="background:#888;">← Volver al equipo</a>
+</div>
+{% endblock %}
